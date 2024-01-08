@@ -1,0 +1,15 @@
+<?php if (isset($_GET['aksi'])) {
+                    if ($_GET['aksi'] == 'hapus') {
+                        $hapus = mysqli_query($mysqli, "DELETE FROM penumpang WHERE id = '" . $_GET['id'] . "'");
+                        echo '<script>alert("Data berhasil dihapus!");</script>';
+                        echo '<script>window.location.href = "index.php";</script>';
+                    }else{
+                        if (strpos($conn->error, 'foreign key constraint fails') !== false) {
+                            echo '<script>alert("Gagal menghapus data karena ada ketergantungan referensial. Data tidak dapat dihapus.");</script>';
+                        } else {
+                            // Jika bukan kesalahan ketergantungan referensial, tampilkan pesan error biasa
+                            echo "Error: " . $sql . "<br>" . $conn->error;
+                        }
+                    }
+                }
+                ?>
